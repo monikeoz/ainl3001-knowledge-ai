@@ -202,7 +202,29 @@ def simulated_annealing(problem, start_board):
 
     # TODO
 
-    pass
+    while temperature > 0.1:
+
+        neighbours = generate_neighbours(problem, current)
+
+        neighbour = random.choice(neighbours)
+
+        current_cost = count_conflicts(current)
+        neighbour_cost = count_conflicts(neighbour)
+
+        delta = neighbour_cost - current_cost
+
+        if delta < 0:
+            current = neighbour
+
+        else:
+            probability = math.exp(-delta / temperature)
+
+            if random.random() < probability:
+                current = neighbour
+
+        temperature *= cooling_rate
+
+    return current
 
 
 # --------------------------------------------------

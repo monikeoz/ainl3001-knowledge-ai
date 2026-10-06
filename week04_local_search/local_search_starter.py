@@ -121,6 +121,12 @@ def generate_neighbours(problem, board):
     # 2. Apply each action.
     # 3. Add the resulting state to neighbours.
 
+    actions = problem.actions(board)
+
+    for action in actions:
+        neighbour = problem.result(board, action)
+        neighbours.append(neighbour)
+
     return neighbours
 
 

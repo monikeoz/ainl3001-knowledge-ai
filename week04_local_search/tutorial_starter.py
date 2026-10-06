@@ -57,7 +57,23 @@ class GridProblem(Problem):
         # 4. Add valid actions to the list.
         # 5. Return the list.
 
-        pass
+        x, y = state
+        actions = []
+
+        if y > 0:
+            actions.append("UP")
+
+        if y < GRID_SIZE - 1:
+            actions.append("DOWN")
+
+        if x > 0:
+            actions.append("LEFT")
+
+        if x < GRID_SIZE - 1:
+            actions.append("RIGHT")
+
+        return actions
+
 
     def result(self, state, action):
         """
@@ -77,7 +93,21 @@ class GridProblem(Problem):
         # 2. Check which action was requested.
         # 3. Return the resulting state.
 
-        pass
+        x, y = state
+
+        if action == "UP":
+            return (x, y - 1)
+        
+        elif action == "DOWN":
+            return (x, y + 1)
+        
+        elif action == "LEFT":
+            return (x - 1, y)
+        
+        elif action == "RIGHT":
+            return (x + 1, y)
+
+        
 
 
 # --------------------------------------------------
@@ -137,8 +167,10 @@ print(
 Be ready to discuss:
 
 1. What information is stored in problem.initial?
+stores the starting state of the problem, which is the initial position in the grid so in this case (0,0)
 
 2. What information is stored in problem.goal?
+stores the goal state where we want to get to, so its (4,4) in this case
 
 3. What is the difference between:
 
@@ -147,11 +179,24 @@ Be ready to discuss:
    and:
 
        problem.result(state, action)
+problem.actions(state) asks what can i do from here and problem.result(state, action) asks if i choose this action, where will i end up? 
+actions = possibles moves
+result = outcome of a chosen move
 
 4. Why doesn't Problem know anything about grids?
+the problem doesn't assume every problem is a grid. it provides general framework like 
+initial state, goal, actions, resulting states.
+grid problem is the class that adds the grid specific rules, such as moving up,down,left and right
+problem = general structure
+gridproblem = specific grid rules 
 
 5. Why doesn't GridProblem know anything about search?
+gridproblem only describes the problem, not how to solve it. 
+but doesnt know what we're going to use, like bfs, dfs, greedy search, a*, hill climbing, simulated annealing. 
+the search algorithm is separate. this separations means we can use gridproblems w diff search algorithms.
 
 6. Could the same Problem structure be used for something
    other than a grid?
+yes, one of main reasons we use probelm class. the same structure represent problems such as 
+n-queens problem, route finding, scheduling, puzzles, optimisation problems. 
 """

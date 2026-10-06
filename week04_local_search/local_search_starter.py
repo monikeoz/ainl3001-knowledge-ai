@@ -266,3 +266,80 @@ if __name__ == "__main__":
     print(
         f"{len(neighbours)} neighbours generated"
     )
+
+    print("\nHill Climbing")
+
+    result = hill_climbing(
+        problem,
+        board
+    )
+
+    print("Starting conflicts:", count_conflicts(board))
+    print("Final board:", result)
+    print("Final conflicts:", count_conflicts(result))
+
+    print("\nHill Climbing Experiments")
+
+    for i in range(10):
+
+        start_board = [
+            random.randint(0, N - 1)
+            for _ in range(N)
+        ]
+
+        problem = QueensProblem(start_board)
+
+        result = hill_climbing(
+            problem,
+            start_board
+        )
+
+        print(
+            f"Run {i + 1}: "
+            f"{count_conflicts(start_board)} -> "
+            f"{count_conflicts(result)}"
+        )
+
+    print("\nSimulated Annealing")
+
+    sa_result = simulated_annealing(
+        problem,
+        board
+    )
+
+    print(
+        "Starting conflicts:",
+        count_conflicts(board)
+    )
+
+    print(
+        "Final board:",
+        sa_result
+    )
+
+    print(
+        "Final conflicts:",
+        count_conflicts(sa_result)
+    )
+
+    print("\nSimulated Annealing Experiments")
+
+    for i in range(10):
+
+        start_board = [
+            random.randint(0, N - 1)
+            for _ in range(N)
+        ]
+
+        problem = QueensProblem(start_board)
+
+        result = simulated_annealing(
+            problem,
+            start_board
+        )
+
+        print(
+            f"Run {i + 1}: "
+            f"{count_conflicts(start_board)} -> "
+            f"{count_conflicts(result)}"
+        )

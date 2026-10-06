@@ -163,7 +163,21 @@ def hill_climbing(problem, start_board):
 
     # TODO
 
-    pass
+    while True:
+
+        neighbours = generate_neighbours(problem, current) # gets all possible next states
+
+        best_neighbour = min(neighbours, key=count_conflicts) # finds the neighb our w lowest conflict count
+
+        # checks whether the best neighbour is actually better
+        if count_conflicts(best_neighbour) >= count_conflicts(current):
+            break 
+
+        current = best_neighbour
+
+    return current
+
+
 
 
 # --------------------------------------------------
